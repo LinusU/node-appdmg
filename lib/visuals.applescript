@@ -20,8 +20,7 @@ tell application "Finder"
 
     delay 1 -- Sync
 
-    -- set background picture of the icon view options of container window to file "#{background.location}"
-    set background picture of the icon view options of container window to POSIX file ("#{background.location}" as string)
+    set background picture of the icon view options of container window to file "#{background.location}"
 
     set icon size of the icon view options of container window to #{icons.size}
     set arrangement of the icon view options of container window to not arranged
@@ -37,8 +36,7 @@ tell application "Finder"
 
     set statusbar visible of the container window to false
     set the bounds of the container window to #{window.bounds}
-    -- set background picture of the icon view options of container window to file "#{background.location}"
-    set background picture of the icon view options of container window to POSIX file ("#{background.location}" as string)
+    set background picture of the icon view options of container window to file "#{background.location}"
     update without registering applications
 
     delay 5 -- Sync
