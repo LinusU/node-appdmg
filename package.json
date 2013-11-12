@@ -1,0 +1,12 @@
+{
+  "name": "appdmg",
+  "version": "0.1.0",
+  "dependencies": {
+    "applescript": "~0.2.1",
+    "temp": "~0.6.0",
+    "optimist": "~0.6.0"
+  },
+  "engines": {
+    "node": "~0.10.0"
+  }
+}
