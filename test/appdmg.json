@@ -1,0 +1,11 @@
+{
+  "title": "Test Title",
+  "app": "TestApp.app",
+  "background": "TestBkg.png",
+  "icon": "TestIcon.icns",
+  "icons": {
+    "size": 80,
+    "app": [192, 344],
+    "alias": [448, 344]
+  }
+}
