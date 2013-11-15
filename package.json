@@ -1,6 +1,11 @@
 {
   "name": "appdmg",
   "version": "0.1.0",
+  "license": "MIT",
+  "author": "Linus Unnebäck <linus@folkdatorn.se>",
+  "bin": "bin/appdmg",
+  "main": "index.js",
+  "preferGlobal": true,
   "dependencies": {
     "applescript": "~0.2.1",
     "temp": "~0.6.0",
