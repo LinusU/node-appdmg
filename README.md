@@ -61,6 +61,15 @@ allowed, I'm only using them for demonstration purposes.)
 }
 ```
 
+### Retina background
+
+Finder can display retina backgrounds if packaged correctly into a `.tiff`
+file. `appdmg` will do this for you automatically if it can find a file
+with the same name as the background appended with `@2x`.
+
+E.g. if the json contains `"background": "TestBkg.png"` then add a file
+with the name `TestBkg@2x.png` into the same folder.
+
 ## API
 
 The application can also be called from within
