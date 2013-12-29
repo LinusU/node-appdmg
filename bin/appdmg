@@ -5,6 +5,7 @@ process.title = 'appdmg';
 var path = require('path');
 var optimist = require('optimist');
 var appdmg = require('../index.js');
+var colors = require('../lib/colors');
 
 var usage = [
   'Generate beautiful dmg-images for your OS X applications.',
@@ -27,9 +28,9 @@ if (path.extname(argv._[1]) !== '.dmg') {
 
 appdmg(argv._[0], argv._[1], function (err, res) {
   if (err) {
-    process.stderr.write('\n');
-    throw err;
+    process.stderr.write('\n' + err.stack + '\n');
+    process.stderr.write('\n' + colors.red(err.name + ': ' + err.message) + '\n');
   } else {
-    process.stderr.write('Your image is ready:\n' + res + '\n');
+    process.stderr.write('\n' + colors.green('Your image is ready:') + '\n' + res + '\n');
   }
 });
