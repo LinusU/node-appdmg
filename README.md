@@ -90,8 +90,4 @@ appdmg('test/appdmg.json', 'test.dmg', function (err, path) {
 
 Currently the only supported os is Mac OS X.
 
-Supporing other operating systems would involve writing a custom
-`.DS_Store` writer, but if accomplished would bring improvements
-even to the Mac platform since we could drop all the apple script
-stuff which currently adds ~15 seconds to the build time and pops
-up the Finder.
+Track the status of this here: https://github.com/LinusU/node-appdmg/issues/14
