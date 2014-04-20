@@ -7,9 +7,9 @@
   "main": "index.js",
   "preferGlobal": true,
   "dependencies": {
-    "temp": "~0.6.0",
+    "temp": "~0.7.0",
     "optimist": "~0.6.0",
-    "image-size": "0.0.16",
+    "image-size": "~0.2.3",
     "fs-xattr": "~0.1.0",
     "ds-store": "~0.1.1"
   },
