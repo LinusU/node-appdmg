@@ -10,7 +10,7 @@ var colors = require('../lib/colors');
 
 process.on('uncaughtException', function (err) {
 
-  if (argv.verbose) {
+  if (argv === undefined || argv.verbose) {
     process.stderr.write('\n' + err.stack + '\n');
   }
 
@@ -69,8 +69,7 @@ if (path.extname(argv._[1]) !== '.dmg') {
 
 appdmg(argv._[0], argv._[1], function (err, res) {
   if (err) {
-    process.stderr.write('\n' + err.stack + '\n');
-    process.stderr.write('\n' + colors.red(err.name + ': ' + err.message) + '\n');
+    throw err;
   } else {
     process.stderr.write('\n' + colors.green('Your image is ready:') + '\n' + res + '\n');
   }
