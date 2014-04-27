@@ -8,6 +8,7 @@
   "preferGlobal": true,
   "dependencies": {
     "temp": "~0.7.0",
+    "async": "~0.7.0",
     "minimist": "~0.0.8",
     "image-size": "~0.2.3",
     "fs-xattr": "~0.1.0",

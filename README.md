@@ -56,7 +56,15 @@ allowed, I'm only using them for demonstration purposes.)
     "size": 80,
     "app": [192, 344],
     "alias": [448, 344]
-  }
+  },
+
+  // Optional extra files to be put in the DMG
+  // Each entry is [path, Xpos, Ypos]
+  "extra": [
+    ["TestDoc.txt", 512, 128]
+  ]
+
+}
 
 }
 ```
