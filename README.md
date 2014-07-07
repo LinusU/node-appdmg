@@ -65,8 +65,6 @@ allowed, I'm only using them for demonstration purposes.)
   ]
 
 }
-
-}
 ```
 
 ### Retina background
