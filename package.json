@@ -12,7 +12,7 @@
     "minimist": "~0.0.8",
     "image-size": "~0.2.3",
     "fs-xattr": "~0.1.0",
-    "ds-store": "~0.1.1"
+    "ds-store": "~0.1.2"
   },
   "engines": {
     "node": "~0.10.0"
