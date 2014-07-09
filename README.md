@@ -39,33 +39,36 @@ allowed, I'm only using them for demonstration purposes.)
   // The title of the produced DMG, which will be shown when mounted
   "title": "Test Title",
 
-  // Path to your .app
-  "app": "TestApp.app",
+  // Path to your icon, which will be shown when mounted
+  "icon": "TestIcon.icns",
 
   // Path to your background
   "background": "TestBkg.png",
 
-  // Path to your icon, which will be shown when mounted
-  "icon": "TestIcon.icns",
+  // Size of all the icons inside the DMG
+  "icon-size": 80,
 
-  // Size and position of the icons in the DMG
-  // Positions are specified as X and Y in the center of said icon
-  // "app" is your application
-  // "alias" is an alias to the Applications folder
-  "icons": {
-    "size": 80,
-    "app": [192, 344],
-    "alias": [448, 344]
-  },
+  "contents": [
 
-  // Optional extra files to be put in the DMG
-  // Each entry is [path, Xpos, Ypos]
-  "extra": [
-    ["TestDoc.txt", 512, 128]
+    // This is the contents of your DMG.
+
+    // Each entry has a position specified by
+    // X and Y in the center of its icon.
+
+    // `type: link` creates a link to the specified target
+    { "x": 192, "y": 344, "type": "link", "path": "/Applications" },
+
+    // `type: file` adds a file to the DMG
+    { "x": 448, "y": 344, "type": "file", "path": "TestApp.app" },
+    { "x": 512, "y": 128, "type": "file", "path": "TestDoc.txt" }
+
   ]
 
 }
 ```
+
+`0.1.x` used a different format on the specification. This format is still
+supported but deprecated, please update your json.
 
 ### Retina background
 
