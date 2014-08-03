@@ -58,7 +58,7 @@ if (argv.help || argv._.length < 2) {
   process.exit(0);
 }
 
-if (argv._.length > 3) {
+if (argv._.length > 2) {
   throw new Error('Too many arguments');
 }
 
