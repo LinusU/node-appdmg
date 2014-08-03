@@ -77,7 +77,7 @@ appdmg(argv._[0], argv._[1], 1, function (err, res) {
   }
 });
 }else{
-appdmg(argv._[0], argv._[1], 1, function (err, res) {
+appdmg(argv._[0], argv._[1], 0, function (err, res) {
   if (err) {
     throw err;
   } else {
