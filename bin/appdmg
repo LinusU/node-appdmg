@@ -35,13 +35,16 @@ var usage = [
   '--help',
   '    Display usage and exit',
   '',
+  '--quiet',
+  '    Suppresses all commandline output',
+  '',
   '--version',
   '    Display version and exit',
   ''
 ].join('\n');
 
 var argv = minimist(process.argv.slice(2), {
-  boolean: ['verbose', 'help', 'version'],
+  boolean: ['verbose', 'help', 'version', 'quiet'],
   alias: { v: 'verbose' }
 });
 
@@ -67,10 +70,18 @@ if (path.extname(argv._[1]) !== '.dmg') {
   throw new Error('Output must have the .dmg file extension');
 }
 
-appdmg(argv._[0], argv._[1], function (err, res) {
+if(argv.quiet){
+appdmg(argv._[0], argv._[1], 1, function (err, res) {
+  if (err) {
+    throw err;
+  }
+});
+}else{
+appdmg(argv._[0], argv._[1], 0, function (err, res) {
   if (err) {
     throw err;
   } else {
     process.stderr.write('\n' + colors.green('Your image is ready:') + '\n' + res + '\n');
   }
 });
+}
