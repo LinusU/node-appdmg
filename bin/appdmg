@@ -74,8 +74,6 @@ if(argv.quiet){
 appdmg(argv._[0], argv._[1], 1, function (err, res) {
   if (err) {
     throw err;
-  } else { 
-    process.stderr.write('\n' + colors.green('Your image is ready:') + '\n' + res + '\n');
   }
 });
 }else{
