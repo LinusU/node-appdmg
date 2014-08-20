@@ -94,7 +94,7 @@ p.on('progress', function (info) {
 
   if (info.type === 'step-end') {
     var op = ({
-      ok: ['green', 'OK'],
+      ok: ['green', ' OK '],
       skip: ['yellow', 'SKIP'],
       error: ['red', 'FAIL']
     }[info.status]);
