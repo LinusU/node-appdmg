@@ -8,13 +8,19 @@ var pkg = require('../package.json');
 var appdmg = require('../index.js');
 var colors = require('../lib/colors');
 
+function maybeWithColor(color, text) {
+  if (!process.stderr.isTTY) { return text; }
+
+  return colors[color].call(colors, text);
+}
+
 process.on('uncaughtException', function (err) {
 
   if (argv === undefined || argv.verbose) {
     process.stderr.write('\n' + err.stack + '\n');
   }
 
-  process.stderr.write('\n' + colors.red(err.name + ': ' + err.message) + '\n');
+  process.stderr.write('\n' + maybeWithColor('red', err.name + ': ' + err.message) + '\n');
   process.exit(1);
 
 });
@@ -85,11 +91,11 @@ p.on('progress', function (info) {
       error: ['red', 'FAIL']
     }[info.status]);
 
-    process.stderr.write('[' + colors[op[0]].call(colors, op[1]) + ']\n');
+    process.stderr.write('[' + maybeWithColor(op[0], op[1]) + ']\n');
   }
 
 });
 
 p.on('finish', function () {
-  process.stderr.write('\n' + colors.green('Your image is ready:') + '\n' + target + '\n');
+  process.stderr.write('\n' + maybeWithColor('green', 'Your image is ready:') + '\n' + target + '\n');
 });
