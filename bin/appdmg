@@ -16,11 +16,15 @@ function maybeWithColor(color, text) {
 
 process.on('uncaughtException', function (err) {
 
-  if (argv === undefined || argv.verbose) {
-    process.stderr.write('\n' + err.stack + '\n');
+  if (!argv.quiet) {
+    process.stderr.write('\n');
   }
 
-  process.stderr.write('\n' + maybeWithColor('red', err.name + ': ' + err.message) + '\n');
+  if (argv === undefined || argv.verbose) {
+    process.stderr.write(err.stack + '\n\n');
+  }
+
+  process.stderr.write(maybeWithColor('red', err.name + ': ' + err.message) + '\n');
   process.exit(1);
 
 });
@@ -38,6 +42,9 @@ var usage = [
   '-v, --verbose',
   '    Verbose error output',
   '',
+  '--quiet',
+  '    Suppresses progress output',
+  '',
   '--help',
   '    Display usage and exit',
   '',
@@ -47,7 +54,7 @@ var usage = [
 ].join('\n');
 
 var argv = minimist(process.argv.slice(2), {
-  boolean: ['verbose', 'help', 'version'],
+  boolean: ['verbose', 'quiet', 'help', 'version'],
   alias: { v: 'verbose' }
 });
 
@@ -78,6 +85,7 @@ var target = argv._[1];
 var p = appdmg(source, target);
 
 p.on('progress', function (info) {
+  if (argv.quiet) { return ; }
 
   if (info.type === 'step-begin') {
     var line =  '[' + (info.current <= 9 ? ' ' : '') + info.current + '/' + info.total + '] ' + info.title + '...';
@@ -97,5 +105,7 @@ p.on('progress', function (info) {
 });
 
 p.on('finish', function () {
+  if (argv.quiet) { return ; }
+
   process.stderr.write('\n' + maybeWithColor('green', 'Your image is ready:') + '\n' + target + '\n');
 });
