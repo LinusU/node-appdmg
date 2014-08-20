@@ -67,10 +67,29 @@ if (path.extname(argv._[1]) !== '.dmg') {
   throw new Error('Output must have the .dmg file extension');
 }
 
-appdmg(argv._[0], argv._[1], function (err, res) {
-  if (err) {
-    throw err;
-  } else {
-    process.stderr.write('\n' + colors.green('Your image is ready:') + '\n' + res + '\n');
+var source = argv._[0];
+var target = argv._[1];
+var p = appdmg(source, target);
+
+p.on('progress', function (info) {
+
+  if (info.type === 'step-begin') {
+    var line =  '[' + (info.current <= 9 ? ' ' : '') + info.current + '/' + info.total + '] ' + info.title + '...';
+    process.stderr.write(line + String.repeat(' ', 45 - line.length));
   }
+
+  if (info.type === 'step-end') {
+    var op = ({
+      ok: ['green', 'OK'],
+      skip: ['yellow', 'SKIP'],
+      error: ['red', 'FAIL']
+    }[info.status]);
+
+    process.stderr.write('[' + colors[op[0]].call(colors, op[1]) + ']\n');
+  }
+
+});
+
+p.on('finish', function () {
+  process.stderr.write('\n' + colors.green('Your image is ready:') + '\n' + target + '\n');
 });
