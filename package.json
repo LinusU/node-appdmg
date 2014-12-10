@@ -11,10 +11,10 @@
     "async": "~0.7.0",
     "minimist": "~0.0.8",
     "image-size": "~0.2.3",
-    "fs-xattr": "~0.1.0",
-    "ds-store": "~0.1.2"
+    "fs-xattr": "~0.1.4",
+    "ds-store": "~0.1.4"
   },
   "engines": {
-    "node": "~0.10.0"
+    "node": ">=0.10.0"
   }
 }
