@@ -56,10 +56,10 @@ allowed, I'm only using them for demonstration purposes.)
     // X and Y in the center of its icon.
 
     // `type: link` creates a link to the specified target
-    { "x": 192, "y": 344, "type": "link", "path": "/Applications" },
+    { "x": 448, "y": 344, "type": "link", "path": "/Applications" },
 
     // `type: file` adds a file to the DMG
-    { "x": 448, "y": 344, "type": "file", "path": "TestApp.app" },
+    { "x": 192, "y": 344, "type": "file", "path": "TestApp.app" },
     { "x": 512, "y": 128, "type": "file", "path": "TestDoc.txt" }
 
   ]
