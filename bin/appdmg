@@ -82,7 +82,7 @@ if (path.extname(argv._[1]) !== '.dmg') {
 
 var source = argv._[0];
 var target = argv._[1];
-var p = appdmg(source, target);
+var p = appdmg({source: source, target: target});
 
 p.on('progress', function (info) {
   if (argv.quiet) { return ; }
