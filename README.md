@@ -87,7 +87,7 @@ another javascript file, example:
 ```javascript
 
 var appdmg = require('appdmg');
-var ee = appdmg('test/appdmg.json', 'test.dmg');
+var ee = appdmg({ source: 'test/appdmg.json', target: 'test.dmg' });
 
 ee.on('progress', function (info) {
 
