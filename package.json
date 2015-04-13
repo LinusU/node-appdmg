@@ -1,6 +1,6 @@
 {
   "name": "appdmg",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "license": "MIT",
   "author": "Linus Unnebäck <linus@folkdatorn.se>",
   "bin": "bin/appdmg",
@@ -17,7 +17,9 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "os": ["darwin"],
+  "os": [
+    "darwin"
+  ],
   "repository": {
     "type": "git",
     "url": "http://github.com/LinusU/node-appdmg.git"
