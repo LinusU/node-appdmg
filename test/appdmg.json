@@ -1,6 +1,7 @@
 {
   "title": "Test Title",
   "icon": "TestIcon.icns",
+  "volume-icon": "TestVolIcon.icns",
   "background": "TestBkg.png",
   "icon-size": 80,
   "contents": [
