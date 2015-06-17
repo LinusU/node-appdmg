@@ -1,6 +1,6 @@
 {
   "name": "appdmg",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "license": "MIT",
   "author": "Linus Unnebäck <linus@folkdatorn.se>",
   "bin": "bin/appdmg",
