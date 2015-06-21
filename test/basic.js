@@ -1,3 +1,5 @@
+/* eslint-env mocha */
+
 var appdmg = require('../')
 var imageFormat = require('./lib/image-format')
 var visuallyVerifyImage = require('./lib/visually-verify-image')

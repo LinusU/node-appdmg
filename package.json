@@ -7,12 +7,13 @@
   "main": "index.js",
   "preferGlobal": true,
   "dependencies": {
-    "temp": "~0.7.0",
     "async": "~0.7.0",
-    "minimist": "~0.0.8",
-    "image-size": "~0.2.3",
+    "ds-store": "~0.1.4",
     "fs-xattr": "~0.1.4",
-    "ds-store": "~0.1.4"
+    "image-size": "~0.2.3",
+    "minimist": "~0.0.8",
+    "repeat-string": "^1.5.2",
+    "temp": "~0.7.0"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -25,12 +26,13 @@
     "url": "http://github.com/LinusU/node-appdmg.git"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "standard && mocha"
   },
   "devDependencies": {
     "capture-window": "^0.1.1",
     "fs-temp": "^0.1.2",
     "looks-same": "^1.1.1",
-    "mocha": "^2.2.5"
+    "mocha": "^2.2.5",
+    "standard": "^4.3.1"
   }
 }

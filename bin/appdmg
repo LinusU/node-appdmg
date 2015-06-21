@@ -1,33 +1,32 @@
 #!/usr/bin/env node
 
-process.title = 'appdmg';
+process.title = 'appdmg'
 
-var path = require('path');
-var minimist = require('minimist');
-var pkg = require('../package.json');
-var appdmg = require('../index.js');
-var colors = require('../lib/colors');
+var path = require('path')
+var minimist = require('minimist')
+var pkg = require('../package.json')
+var appdmg = require('../index.js')
+var colors = require('../lib/colors')
+var repeatString = require('repeat-string')
 
 function maybeWithColor(color, text) {
-  if (!process.stderr.isTTY) { return text; }
+  if (!process.stderr.isTTY) return text
 
-  return colors[color].call(colors, text);
+  return colors[color].call(colors, text)
 }
 
 process.on('uncaughtException', function (err) {
-
   if (!argv.quiet) {
-    process.stderr.write('\n');
+    process.stderr.write('\n')
   }
 
   if (argv === undefined || argv.verbose) {
-    process.stderr.write(err.stack + '\n\n');
+    process.stderr.write(err.stack + '\n\n')
   }
 
-  process.stderr.write(maybeWithColor('red', err.name + ': ' + err.message) + '\n');
-  process.exit(1);
-
-});
+  process.stderr.write(maybeWithColor('red', err.name + ': ' + err.message) + '\n')
+  process.exit(1)
+})
 
 var usage = [
   'Generate beautiful dmg-images for your OS X applications.',
@@ -51,45 +50,45 @@ var usage = [
   '--version',
   '    Display version and exit',
   ''
-].join('\n');
+].join('\n')
 
 var argv = minimist(process.argv.slice(2), {
   boolean: ['verbose', 'quiet', 'help', 'version'],
   alias: { v: 'verbose' }
-});
+})
 
 if (argv.version) {
-  process.stderr.write('node-appdmg v' + pkg.version + '\n');
-  process.exit(0);
+  process.stderr.write('node-appdmg v' + pkg.version + '\n')
+  process.exit(0)
 }
 
 if (argv.help || argv._.length < 2) {
-  process.stderr.write(usage + '\n');
-  process.exit(0);
+  process.stderr.write(usage + '\n')
+  process.exit(0)
 }
 
 if (argv._.length > 2) {
-  throw new Error('Too many arguments');
+  throw new Error('Too many arguments')
 }
 
 if (path.extname(argv._[0]) !== '.json') {
-  throw new Error('Input must have the .json file extension');
+  throw new Error('Input must have the .json file extension')
 }
 
 if (path.extname(argv._[1]) !== '.dmg') {
-  throw new Error('Output must have the .dmg file extension');
+  throw new Error('Output must have the .dmg file extension')
 }
 
-var source = argv._[0];
-var target = argv._[1];
-var p = appdmg({ source: source, target: target });
+var source = argv._[0]
+var target = argv._[1]
+var p = appdmg({ source: source, target: target })
 
 p.on('progress', function (info) {
-  if (argv.quiet) { return ; }
+  if (argv.quiet) return
 
   if (info.type === 'step-begin') {
-    var line =  '[' + (info.current <= 9 ? ' ' : '') + info.current + '/' + info.total + '] ' + info.title + '...';
-    process.stderr.write(line + String.repeat(' ', 45 - line.length));
+    var line =  '[' + (info.current <= 9 ? ' ' : '') + info.current + '/' + info.total + '] ' + info.title + '...'
+    process.stderr.write(line + repeatString(' ', 45 - line.length))
   }
 
   if (info.type === 'step-end') {
@@ -97,15 +96,15 @@ p.on('progress', function (info) {
       ok: ['green', ' OK '],
       skip: ['yellow', 'SKIP'],
       error: ['red', 'FAIL']
-    }[info.status]);
+    }[info.status])
 
-    process.stderr.write('[' + maybeWithColor(op[0], op[1]) + ']\n');
+    process.stderr.write('[' + maybeWithColor(op[0], op[1]) + ']\n')
   }
 
 });
 
 p.on('finish', function () {
-  if (argv.quiet) { return ; }
+  if (argv.quiet) return
 
-  process.stderr.write('\n' + maybeWithColor('green', 'Your image is ready:') + '\n' + target + '\n');
-});
+  process.stderr.write('\n' + maybeWithColor('green', 'Your image is ready:') + '\n' + target + '\n')
+})

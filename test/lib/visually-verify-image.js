@@ -1,5 +1,3 @@
-var fs = require('fs')
-var temp = require('fs-temp').template('%s.png')
 var hdiutil = require('../../lib/hdiutil')
 var looksSame = require('looks-same')
 var child_process = require('child_process')
@@ -13,7 +11,7 @@ function retry (fn, cb) {
   function runIteration () {
     fn(function (err) {
       if (!err) return cb(null)
-      if (--triesLeft == 0) return cb(err)
+      if (--triesLeft === 0) return cb(err)
 
       setTimeout(runIteration, 150)
     })
@@ -35,7 +33,7 @@ function captureAndVerify (title, expectedPath, cb) {
   })
 }
 
-function visuallyVerifyImage(imagePath, title, expectedPath, cb) {
+function visuallyVerifyImage (imagePath, title, expectedPath, cb) {
   hdiutil.attach(imagePath, function (err, mountPath) {
     if (err) return cb(err)
 

@@ -1,2 +1,1 @@
-
-module.exports = exports = require('./lib/appdmg');
+module.exports = exports = require('./lib/appdmg')
