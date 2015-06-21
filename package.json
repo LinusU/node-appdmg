@@ -23,5 +23,14 @@
   "repository": {
     "type": "git",
     "url": "http://github.com/LinusU/node-appdmg.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "capture-window": "^0.1.1",
+    "fs-temp": "^0.1.2",
+    "looks-same": "^1.1.1",
+    "mocha": "^2.2.5"
   }
 }
