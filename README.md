@@ -113,6 +113,19 @@ ee.on('error', function (err) {
 
 ```
 
+You can also pass in the specification directly instead of reading it from a file. `basepath` should be a path which will be used to resolve other paths in the specification.
+
+```javascript
+var ee = appdmg({
+  target: 'test.dmg',
+  basepath: __dirname,
+  specification: {
+    "title": "Test Title",
+    // ...
+  }
+});
+```
+
 ## OS Support
 
 Currently the only supported os is Mac OS X.
