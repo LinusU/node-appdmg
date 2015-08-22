@@ -53,7 +53,7 @@ var usage = [
 ].join('\n')
 
 var argv = minimist(process.argv.slice(2), {
-  boolean: ['verbose', 'quiet', 'help', 'version'],
+  boolean: [ 'verbose', 'quiet', 'help', 'version' ],
   alias: { v: 'verbose' }
 })
 

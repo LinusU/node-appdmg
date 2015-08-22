@@ -3,7 +3,7 @@ var looksSame = require('looks-same')
 var child_process = require('child_process')
 var captureWindow = require('capture-window')
 
-var toleranceOpts = { tolerance: 5 }
+var toleranceOpts = { tolerance: 20 }
 
 function retry (fn, cb) {
   var triesLeft = 8
