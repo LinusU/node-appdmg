@@ -9,11 +9,11 @@
   "dependencies": {
     "async": "~0.7.0",
     "ds-store": "~0.1.4",
+    "fs-temp": "^0.1.2",
     "fs-xattr": "~0.1.4",
     "image-size": "~0.2.3",
     "minimist": "~0.0.8",
-    "repeat-string": "^1.5.2",
-    "temp": "~0.7.0"
+    "repeat-string": "^1.5.2"
   },
   "engines": {
     "node": ">=0.10.0"
