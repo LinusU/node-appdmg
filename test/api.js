@@ -32,7 +32,7 @@ function runAppdmg (opts, verify, cb) {
   })
 }
 
-describe('appdmg', function () {
+describe('api', function () {
   var targetDir, targetPath
 
   beforeEach(function () {
