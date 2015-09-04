@@ -107,4 +107,31 @@ describe('api', function () {
     runAppdmg(opts, verify, done)
   })
 
+  it('creates an image with a custom file and link titles', function (done) {
+    this.timeout(60000) // 1 minute
+
+    var opts = {
+      target: targetPath,
+      basepath: path.join(__dirname, 'assets'),
+      specification: {
+        title: 'Test Title',
+        icon: 'TestIcon.icns',
+        background: 'TestBkg.png',
+        'icon-size': 80,
+        contents: [
+          { x: 448, y: 344, type: 'link', path: '/Applications', title: 'MyApps' },
+          { x: 512, y: 128, type: 'file', path: 'TestDoc.txt', title: 'MyDoc.txt' }
+        ]
+      }
+    }
+
+    var verify = {
+      format: 'UDZO',
+      title: 'Test Title',
+      visually: 'accepted-2.png'
+    }
+
+    runAppdmg(opts, verify, done)
+  })
+
 })
