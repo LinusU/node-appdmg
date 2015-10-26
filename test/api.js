@@ -106,5 +106,4 @@ describe('api', function () {
 
     runAppdmg(opts, verify, done)
   })
-
 })
