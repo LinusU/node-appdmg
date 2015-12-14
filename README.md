@@ -131,3 +131,8 @@ var ee = appdmg({
 Currently the only supported os is Mac OS X.
 
 Track the status of this here: https://github.com/LinusU/node-appdmg/issues/14
+
+## Alternatives
+
+* [create-dmg](https://github.com/andreyvit/create-dmg/blob/master/README.md), a Bash script
+* [dmgbuild](https://pypi.python.org/pypi/dmgbuild), a Python version
