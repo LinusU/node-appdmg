@@ -1,7 +1,10 @@
-var hdiutil = require('../../lib/hdiutil')
+var fs = require('fs')
+var temp = require('fs-temp').template('%s.png')
 var looksSame = require('looks-same')
 var child_process = require('child_process')
 var captureWindow = require('capture-window')
+
+var hdiutil = require('../../lib/hdiutil')
 
 var toleranceOpts = { tolerance: 20 }
 
@@ -24,11 +27,38 @@ function captureAndVerify (title, expectedPath, cb) {
   captureWindow('Finder', title, function (err, pngPath) {
     if (err) return cb(err)
 
-    looksSame(pngPath, expectedPath, toleranceOpts, function (err, ok) {
-      if (err) return cb(err)
-      if (ok) return cb(null)
+    looksSame(pngPath, expectedPath, toleranceOpts, function (err1, ok) {
+      fs.unlink(pngPath, function (err2) {
+        if (err1) return cb(err1)
+        if (err2) return cb(err2)
+        if (ok) return cb(null)
 
-      cb(new Error('Image looks visually incorrect'))
+        var err = new Error('Image looks visually incorrect')
+        err.code = 'VISUALLY_INCORRECT'
+        cb(err)
+      })
+    })
+  })
+}
+
+function captureAndSaveDiff (title, expectedPath, cb) {
+  captureWindow('Finder', title, function (err, pngPath) {
+    if (err) return cb(err)
+
+    var opts = Object.assign({
+      reference: expectedPath,
+      current: pngPath,
+      highlightColor: '#f0f'
+    }, toleranceOpts)
+
+    looksSame.createDiff(opts, function (err, data) {
+      if (err) return cb(err)
+
+      temp.writeFile(data, function (err, diffPath) {
+        if (err) return cb(err)
+
+        cb(null, { diff: diffPath, actual: pngPath })
+      })
     })
   })
 }
@@ -38,11 +68,26 @@ function visuallyVerifyImage (imagePath, title, expectedPath, cb) {
     if (err) return cb(err)
 
     function done (err1) {
-      hdiutil.detach(mountPath, function (err2) {
-        if (err1) return cb(err1)
-        if (err2) return cb(err2)
+      function detach (err3) {
+        hdiutil.detach(mountPath, function (err2) {
+          if (err1) return cb(err1)
+          if (err2) return cb(err2)
+          if (err3) return cb(err3)
 
-        cb(null)
+          cb(null)
+        })
+      }
+
+      if (!err1 || err1.code !== 'VISUALLY_INCORRECT') {
+        return detach()
+      }
+
+      captureAndSaveDiff(title, expectedPath, function (err3, res) {
+        if (err3) return detach(err3)
+
+        console.error('A diff of the images have been saved to:', res.diff)
+        console.error('The actual image have been saved to:', res.actual)
+        detach()
       })
     }
 
