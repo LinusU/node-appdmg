@@ -9,10 +9,10 @@ var appdmg = require('../index.js')
 var colors = require('../lib/colors')
 var repeatString = require('repeat-string')
 
-function maybeWithColor(color, text) {
+function maybeWithColor (color, text) {
   if (!process.stderr.isTTY) return text
 
-  return colors[color].call(colors, text)
+  return colors[color](colors, text)
 }
 
 process.on('uncaughtException', function (err) {
@@ -87,7 +87,7 @@ p.on('progress', function (info) {
   if (argv.quiet) return
 
   if (info.type === 'step-begin') {
-    var line =  '[' + (info.current <= 9 ? ' ' : '') + info.current + '/' + info.total + '] ' + info.title + '...'
+    var line = '[' + (info.current <= 9 ? ' ' : '') + info.current + '/' + info.total + '] ' + info.title + '...'
     process.stderr.write(line + repeatString(' ', 45 - line.length))
   }
 
@@ -100,8 +100,7 @@ p.on('progress', function (info) {
 
     process.stderr.write('[' + maybeWithColor(op[0], op[1]) + ']\n')
   }
-
-});
+})
 
 p.on('finish', function () {
   if (argv.quiet) return

@@ -8,7 +8,7 @@ var temp = require('fs-temp')
 var assert = require('assert')
 var spawnSync = require('child_process').spawnSync
 
-var bin = path.join(__dirname, '..', 'bin', 'appdmg')
+var bin = path.join(__dirname, '..', 'bin', 'appdmg.js')
 
 function bufferContains (buffer, needle) {
   return (buffer.toString().indexOf(needle) !== -1)
