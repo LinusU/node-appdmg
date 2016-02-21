@@ -33,7 +33,7 @@ function captureAndVerify (title, expectedPath, cb) {
 
     // If the actual size is scaled by two, use the retina image.
     if (actualSize.width === expectedSize.width * 2 && actualSize.height === expectedSize.height * 2) {
-      expectedPath = expectedPath.replace('.png', '@2x.png')
+      expectedPath = expectedPath.replace(/(\.[^\.]*)$/, '@2x$1')
     }
 
     looksSame(pngPath, expectedPath, toleranceOpts, function (err1, ok) {
