@@ -3,6 +3,7 @@ var temp = require('fs-temp').template('%s.png')
 var looksSame = require('looks-same')
 var child_process = require('child_process')
 var captureWindow = require('capture-window')
+var sizeOf = require('image-size')
 
 var hdiutil = require('../../lib/hdiutil')
 
@@ -26,6 +27,14 @@ function retry (fn, cb) {
 function captureAndVerify (title, expectedPath, cb) {
   captureWindow('Finder', title, function (err, pngPath) {
     if (err) return cb(err)
+
+    const actualSize = sizeOf(pngPath)
+    const expectedSize = sizeOf(expectedPath)
+
+    // If the actual size is scaled by two, use the retina image.
+    if (actualSize.width === expectedSize.width * 2 && actualSize.height === expectedSize.height * 2) {
+      expectedPath = expectedPath.replace('.png', '@2x.png')
+    }
 
     looksSame(pngPath, expectedPath, toleranceOpts, function (err1, ok) {
       fs.unlink(pngPath, function (err2) {
