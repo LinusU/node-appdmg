@@ -12,7 +12,7 @@ var repeatString = require('repeat-string')
 function maybeWithColor (color, text) {
   if (!process.stderr.isTTY) return text
 
-  return colors[color](colors, text)
+  return colors[color](text)
 }
 
 process.on('uncaughtException', function (err) {
