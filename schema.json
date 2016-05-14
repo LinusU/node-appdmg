@@ -18,9 +18,12 @@
     "format": {
       "type": "string",
       "enum": [
-        "UDBZ",
+        "UDRW",
+        "UDRO",
+        "UDCO",
         "UDZO",
-        "NONE"
+        "ULFO",
+        "UDBZ"
       ]
     },
     "contents": {
