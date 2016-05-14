@@ -106,4 +106,33 @@ describe('api', function () {
 
     runAppdmg(opts, verify, done)
   })
+
+  it('creates an image without compression', function (done) {
+    this.timeout(60000) // 1 minute
+
+    var opts = {
+      target: targetPath,
+      basepath: path.join(__dirname, 'assets'),
+      specification: {
+        title: 'Test Title',
+        icon: 'TestIcon.icns',
+        background: 'TestBkg.png',
+        format: 'UDRO',
+        'icon-size': 80,
+        contents: [
+          { x: 448, y: 344, type: 'link', path: '/Applications' },
+          { x: 192, y: 344, type: 'file', path: 'TestApp.app' },
+          { x: 512, y: 128, type: 'file', path: 'TestDoc.txt' }
+        ]
+      }
+    }
+
+    var verify = {
+      format: 'UDRO',
+      title: 'Test Title',
+      visually: 'accepted-1.png'
+    }
+
+    runAppdmg(opts, verify, done)
+  })
 })
