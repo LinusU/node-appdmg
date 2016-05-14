@@ -79,6 +79,18 @@ with the same name as the background appended with `@2x`.
 E.g. if the json contains `"background": "TestBkg.png"` then add a file
 with the name `TestBkg@2x.png` into the same folder.
 
+### Image format
+
+The specification also accepts an optional `format` field specifying which
+format the resulting image should be in. The following values are accepted:
+
+- `UDRW` - UDIF read/write image
+- `UDRO` - UDIF read-only image
+- `UDCO` - UDIF ADC-compressed image
+- `UDZO` - UDIF zlib-compressed image
+- `UDBZ` - UDIF bzip2-compressed image (OS X 10.4+ only)
+- `ULFO` - UDIF lzfse-compressed image (OS X 10.11+ only)
+
 ## API
 
 The application can also be called from within
