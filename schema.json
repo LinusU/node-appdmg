@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "additinalProperties": false,
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "background": {
+      "type": "string"
+    },
+    "icon-size": {
+      "type": "integer"
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "UDBZ",
+        "UDZO",
+        "NONE"
+      ]
+    },
+    "contents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "integer"
+          },
+          "y": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "link",
+              "file"
+            ]
+          },
+          "path": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "x",
+          "y",
+          "type",
+          "path"
+        ]
+      }
+    }
+  },
+  "required": [
+    "title",
+    "background",
+    "icon-size",
+    "contents"
+  ]
+}

@@ -12,6 +12,7 @@
     "fs-temp": "^1.0.0",
     "fs-xattr": "~0.1.11",
     "image-size": "~0.4.0",
+    "is-my-json-valid": "^2.13.1",
     "minimist": "^1.1.3",
     "repeat-string": "^1.5.2"
   },
