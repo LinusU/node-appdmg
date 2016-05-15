@@ -1,7 +1,7 @@
 var fs = require('fs')
 var temp = require('fs-temp').template('%s.png')
 var looksSame = require('looks-same')
-var child_process = require('child_process')
+var spawnSync = require('child_process').spawnSync
 var captureWindow = require('capture-window')
 var sizeOf = require('image-size')
 
@@ -101,7 +101,7 @@ function visuallyVerifyImage (imagePath, title, expectedPath, cb) {
     }
 
     try {
-      child_process.spawnSync('open', ['-a', 'Finder', mountPath])
+      spawnSync('open', ['-a', 'Finder', mountPath])
     } catch (spawnErr) {
       return done(spawnErr)
     }
