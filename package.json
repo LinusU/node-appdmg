@@ -8,6 +8,7 @@
   "preferGlobal": true,
   "dependencies": {
     "async": "^1.4.2",
+    "cp-file": "^3.1.0",
     "ds-store": "~0.1.4",
     "fs-temp": "^1.0.0",
     "fs-xattr": "^0.1.14",
