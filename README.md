@@ -51,7 +51,10 @@ allowed, I'm only using them for demonstration purposes.)
   // Window options
   "window": {
     // Position when opened
-    "position": { "x": 250, "y": 250}
+    "position": { "x": 250, "y": 250 },
+
+    // Window size
+    "size": { "width": 500, "height": 500 }
   },
 
   "contents": [
