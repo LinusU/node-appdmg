@@ -47,6 +47,12 @@ allowed, I'm only using them for demonstration purposes.)
 
   // Size of all the icons inside the DMG
   "icon-size": 80,
+  
+  // Window options
+  "window": {
+    // Position when opened
+    "position": { "x": 250, "y": 250}
+  },
 
   "contents": [
 
