@@ -22,7 +22,7 @@ appdmg <json-path> <dmg-path>
 To produce a test DMG to your desktop, run the following command:
 
 ```sh
-appdmg test/appdmg.json ~/Desktop/test.dmg
+appdmg test/assets/appdmg.json ~/Desktop/test.dmg
 ```
 
 ## JSON Input
