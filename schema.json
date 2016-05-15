@@ -15,6 +15,26 @@
     "icon-size": {
       "type": "integer"
     },
+    "window": {
+      "type": "object",
+      "properties": {
+        "position": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "integer"
+            },
+            "y": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "x",
+            "y"
+          ]
+        }
+      }
+    },
     "format": {
       "type": "string",
       "enum": [
