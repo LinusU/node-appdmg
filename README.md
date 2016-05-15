@@ -45,9 +45,12 @@ allowed, I'm only using them for demonstration purposes.)
   // Path to your background
   "background": "TestBkg.png",
 
+  // Background color (accepts css colors)
+  "background-color": "mintcream",
+
   // Size of all the icons inside the DMG
   "icon-size": 80,
-  
+
   // Window options
   "window": {
     // Position when opened

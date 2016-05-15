@@ -12,6 +12,10 @@
     "background": {
       "type": "string"
     },
+    "background-color": {
+      "type": "string",
+      "format": "css-color"
+    },
     "icon-size": {
       "type": "integer"
     },
@@ -94,7 +98,6 @@
   },
   "required": [
     "title",
-    "background",
     "icon-size",
     "contents"
   ]
