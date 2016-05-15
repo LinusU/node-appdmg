@@ -135,4 +135,21 @@ describe('api', function () {
 
     runAppdmg(opts, verify, done)
   })
+
+  it('creates an image with a background color', function (done) {
+    this.timeout(60000) // 1 minute
+
+    var opts = {
+      target: targetPath,
+      source: path.join(__dirname, 'assets', 'appdmg-bg-color.json')
+    }
+
+    var verify = {
+      format: 'UDZO',
+      title: 'Test Title',
+      visually: 'accepted-2.png'
+    }
+
+    runAppdmg(opts, verify, done)
+  })
 })
