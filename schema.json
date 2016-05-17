@@ -80,7 +80,8 @@
             "type": "string",
             "enum": [
               "link",
-              "file"
+              "file",
+              "position"
             ]
           },
           "path": {
