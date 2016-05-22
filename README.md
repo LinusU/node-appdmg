@@ -39,7 +39,6 @@ the JSON file's path.
   "title": "Test Application",
   "icon": "test-app.icns",
   "background": "test-background.png",
-  "icon-size": 80,
   "contents": [
     { "x": 448, "y": 344, "type": "link", "path": "/Applications" },
     { "x": 192, "y": 344, "type": "file", "path": "TestApp.app" }
@@ -53,7 +52,7 @@ the JSON file's path.
 + `icon` (string, optional) - Path to your icon, which will be shown when mounted
 + `background` (string, optional) - Path to your background
 + `background-color` (string, optional) - Background color (accepts css colors)
-+ `icon-size` (string, required) - Size of all the icons inside the DMG
++ `icon-size` (string, optional) - Size of all the icons inside the DMG
 + `window` (object, optional) - Window options
     + `position` (object, optional) - Position when opened
         + `x` (number, required) - X position relative to bottom of the screen

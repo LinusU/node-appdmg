@@ -2,7 +2,6 @@
   "title": "Test Title",
   "icon": "TestIcon.icns",
   "background-color": "mintcream",
-  "icon-size": 80,
   "contents": [
     { "x": 448, "y": 344, "type": "link", "path": "/Applications" },
     { "x": 192, "y": 344, "type": "file", "path": "TestApp.app" },
