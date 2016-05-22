@@ -150,4 +150,31 @@ describe('api', function () {
 
     runAppdmg(opts, verify, done)
   })
+
+  it('creates an image with custom names', function (done) {
+    this.timeout(60000) // 1 minute
+
+    var opts = {
+      target: targetPath,
+      basepath: path.join(__dirname, 'assets'),
+      specification: {
+        title: 'Test Title',
+        icon: 'TestIcon.icns',
+        background: 'TestBkg.png',
+        contents: [
+          { x: 448, y: 344, type: 'link', path: '/Applications', name: 'System Apps' },
+          { x: 192, y: 344, type: 'file', path: 'TestApp.app', name: 'My Nice App.app' },
+          { x: 512, y: 128, type: 'file', path: 'TestDoc.txt', name: 'Documentation.txt' }
+        ]
+      }
+    }
+
+    var verify = {
+      format: 'UDZO',
+      title: 'Test Title',
+      visually: 'accepted-3.png'
+    }
+
+    runAppdmg(opts, verify, done)
+  })
 })

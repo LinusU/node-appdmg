@@ -75,6 +75,7 @@ the JSON file's path.
           + `file` - Adds a file to the DMG
           + `position` - Positions a present file
       + `path` (string, required) - Path to the file
+      + `name` (string, optional) - Name of the file within the DMG
 
 `0.1.x` used a different JSON format. This format is still supported but
 deprecated, please update your json.
