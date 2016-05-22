@@ -22,65 +22,63 @@ appdmg <json-path> <dmg-path>
 To produce a test DMG to your desktop, run the following command:
 
 ```sh
-appdmg test/appdmg.json ~/Desktop/test.dmg
+appdmg test/assets/appdmg.json ~/Desktop/test.dmg
 ```
 
-## JSON Specification
+## JSON Input
 
 ![Visualization](/help/help.png?raw=true)
 
-The specification for the image is a simple json file, example provided
-below. All paths are relative to the json-file's path. (Comments are not
-allowed, I'm only using them for demonstration purposes.)
+The JSON input for the image follows a simple structure. All paths are relative to
+the JSON file's path.
 
-```javascript
+### Example
+
+```json
 {
-
-  // The title of the produced DMG, which will be shown when mounted
-  "title": "Test Title",
-
-  // Path to your icon, which will be shown when mounted
-  "icon": "TestIcon.icns",
-
-  // Path to your background
-  "background": "TestBkg.png",
-
-  // Background color (accepts css colors)
-  "background-color": "mintcream",
-
-  // Size of all the icons inside the DMG
+  "title": "Test Application",
+  "icon": "test-app.icns",
+  "background": "test-background.png",
   "icon-size": 80,
-
-  // Window options
-  "window": {
-    // Position when opened
-    "position": { "x": 250, "y": 250 },
-
-    // Window size
-    "size": { "width": 500, "height": 500 }
-  },
-
   "contents": [
-
-    // This is the contents of your DMG.
-
-    // Each entry has a position specified by
-    // X and Y in the center of its icon.
-
-    // `type: link` creates a link to the specified target
     { "x": 448, "y": 344, "type": "link", "path": "/Applications" },
-
-    // `type: file` adds a file to the DMG
-    { "x": 192, "y": 344, "type": "file", "path": "TestApp.app" },
-    { "x": 512, "y": 128, "type": "file", "path": "TestDoc.txt" }
-
+    { "x": 192, "y": 344, "type": "file", "path": "TestApp.app" }
   ]
-
 }
 ```
 
-`0.1.x` used a different format on the specification. This format is still
-supported but deprecated, please update your json.
+### Specification
+
++ `title` (string, required) - The title of the produced DMG, which will be shown when mounted
++ `icon` (string, optional) - Path to your icon, which will be shown when mounted
++ `background` (string, optional) - Path to your background
++ `background-color` (string, optional) - Background color (accepts css colors)
++ `icon-size` (string, required) - Size of all the icons inside the DMG
++ `window` (object, optional) - Window options
+    + `position` (object, optional) - Position when opened
+        + `x` (number, required) - X position relative to bottom of the screen
+        + `y` (number, required) - Y position relative to bottom of the screen
+    + `size` (object, optional) - Window size
+        + `width` (number, required) - Window width
+        + `height` (number, required) - Window height
++ `format` (enum[string], optional) - Disk image format
+    + `UDRW` - UDIF read/write image
+    + `UDRO` - UDIF read-only image
+    + `UDCO` - UDIF ADC-compressed image
+    + `UDZO` - UDIF zlib-compressed image
+    + `UDBZ` - UDIF bzip2-compressed image (OS X 10.4+ only)
+    + `ULFO` - UDIF lzfse-compressed image (OS X 10.11+ only)
++ `contents` (array[object], required) - This is the contents of your DMG.
+      + `x` (number, required) - X position relative to icon center
+      + `y` (number, required) - Y position relative to icon center
+      + `type` (enum[string], required)
+          + `link` - Creates a link to the specified target
+          + `file` - Adds a file to the DMG
+          + `position` - Positions a present file
+      + `path` (string, required) - Path to the file
+
+`0.1.x` used a different JSON format. This format is still supported but
+deprecated, please update your json.
 
 ### Retina background
 
@@ -90,18 +88,6 @@ with the same name as the background appended with `@2x`.
 
 E.g. if the json contains `"background": "TestBkg.png"` then add a file
 with the name `TestBkg@2x.png` into the same folder.
-
-### Image format
-
-The specification also accepts an optional `format` field specifying which
-format the resulting image should be in. The following values are accepted:
-
-- `UDRW` - UDIF read/write image
-- `UDRO` - UDIF read-only image
-- `UDCO` - UDIF ADC-compressed image
-- `UDZO` - UDIF zlib-compressed image
-- `UDBZ` - UDIF bzip2-compressed image (OS X 10.4+ only)
-- `ULFO` - UDIF lzfse-compressed image (OS X 10.11+ only)
 
 ## API
 
