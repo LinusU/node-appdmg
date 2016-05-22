@@ -52,7 +52,7 @@ the JSON file's path.
 + `icon` (string, optional) - Path to your icon, which will be shown when mounted
 + `background` (string, optional) - Path to your background
 + `background-color` (string, optional) - Background color (accepts css colors)
-+ `icon-size` (string, optional) - Size of all the icons inside the DMG
++ `icon-size` (number, optional) - Size of all the icons inside the DMG
 + `window` (object, optional) - Window options
     + `position` (object, optional) - Position when opened
         + `x` (number, required) - X position relative to bottom of the screen
