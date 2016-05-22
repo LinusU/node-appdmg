@@ -99,7 +99,6 @@
   },
   "required": [
     "title",
-    "icon-size",
     "contents"
   ]
 }

@@ -89,7 +89,6 @@ describe('api', function () {
         title: 'Test Title',
         icon: 'TestIcon.icns',
         background: 'TestBkg.png',
-        'icon-size': 80,
         contents: [
           { x: 448, y: 344, type: 'link', path: '/Applications' },
           { x: 192, y: 344, type: 'file', path: 'TestApp.app' },
@@ -118,7 +117,6 @@ describe('api', function () {
         icon: 'TestIcon.icns',
         background: 'TestBkg.png',
         format: 'UDRO',
-        'icon-size': 80,
         contents: [
           { x: 448, y: 344, type: 'link', path: '/Applications' },
           { x: 192, y: 344, type: 'file', path: 'TestApp.app' },
