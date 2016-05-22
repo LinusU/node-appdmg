@@ -141,6 +141,19 @@ Currently the only supported os is Mac OS X.
 
 Track the status of this here: https://github.com/LinusU/node-appdmg/issues/14
 
+## Hidden files
+
+By default hidden files will show for users with `com.apple.finder AppleShowAllFiles`
+set to `TRUE`. This can be worked around by moving all hidden files outside the initial
+window size, this has the side-effect of enabling a scrollbar.
+
+Files to usually move:
+
+- `.background`
+- `.DS_Store`
+- `.Trashes`
+- `.VolumeIcon.icns`
+
 ## Alternatives
 
 * [create-dmg](https://github.com/andreyvit/create-dmg/blob/master/README.md), a Bash script
