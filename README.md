@@ -52,7 +52,7 @@ the JSON file's path.
 + `icon` (string, optional) - Path to your icon, which will be shown when mounted
 + `background` (string, optional) - Path to your background
 + `background-color` (string, optional) - Background color (accepts css colors)
-+ `icon-size` (string, optional) - Size of all the icons inside the DMG
++ `icon-size` (number, optional) - Size of all the icons inside the DMG
 + `window` (object, optional) - Window options
     + `position` (object, optional) - Position when opened
         + `x` (number, required) - X position relative to bottom of the screen
@@ -140,6 +140,19 @@ var ee = appdmg({
 Currently the only supported os is Mac OS X.
 
 Track the status of this here: https://github.com/LinusU/node-appdmg/issues/14
+
+## Hidden files
+
+By default hidden files will show for users with `com.apple.finder AppleShowAllFiles`
+set to `TRUE`. This can be worked around by moving all hidden files outside the initial
+window size, this has the side-effect of enabling a scrollbar.
+
+Files to usually move:
+
+- `.background`
+- `.DS_Store`
+- `.Trashes`
+- `.VolumeIcon.icns`
 
 ## Alternatives
 
