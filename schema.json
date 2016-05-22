@@ -86,6 +86,9 @@
           },
           "path": {
             "type": "string"
+          },
+          "name": {
+            "type": "string"
           }
         },
         "required": [
