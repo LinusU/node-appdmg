@@ -9,7 +9,7 @@ var path = require('path')
 var temp = require('fs-temp')
 var assert = require('assert')
 
-var STEPS = 21
+var STEPS = 22
 
 function runAppdmg (opts, verify, cb) {
   var progressCalled = 0
