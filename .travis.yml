@@ -1,0 +1,10 @@
+language: node_js
+osx_image: xcode7.3
+os:
+  - osx
+node_js:
+  - 6
+script:
+  - defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+  - killall Finder
+  - npm test

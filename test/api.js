@@ -11,6 +11,8 @@ var assert = require('assert')
 
 var STEPS = 20
 
+var CI_PREFIX = process.env.TRAVIS ? 'travis-' : ''
+
 function runAppdmg (opts, verify, cb) {
   var progressCalled = 0
   var ee = appdmg(opts)
@@ -56,7 +58,7 @@ describe('api', function () {
     var verify = {
       format: 'UDZO',
       title: 'Test Title',
-      visually: 'accepted-1.png'
+      visually: CI_PREFIX + 'accepted-1.png'
     }
 
     runAppdmg(opts, verify, done)
@@ -73,7 +75,7 @@ describe('api', function () {
     var verify = {
       format: 'UDZO',
       title: 'Test Title',
-      visually: 'accepted-1.png'
+      visually: CI_PREFIX + 'accepted-1.png'
     }
 
     runAppdmg(opts, verify, done)
@@ -100,7 +102,7 @@ describe('api', function () {
     var verify = {
       format: 'UDZO',
       title: 'Test Title',
-      visually: 'accepted-1.png'
+      visually: CI_PREFIX + 'accepted-1.png'
     }
 
     runAppdmg(opts, verify, done)
@@ -128,7 +130,7 @@ describe('api', function () {
     var verify = {
       format: 'UDRO',
       title: 'Test Title',
-      visually: 'accepted-1.png'
+      visually: CI_PREFIX + 'accepted-1.png'
     }
 
     runAppdmg(opts, verify, done)
@@ -145,7 +147,7 @@ describe('api', function () {
     var verify = {
       format: 'UDZO',
       title: 'Test Title',
-      visually: 'accepted-2.png'
+      visually: CI_PREFIX + 'accepted-2.png'
     }
 
     runAppdmg(opts, verify, done)
