@@ -146,7 +146,7 @@ Track the status of this here: https://github.com/LinusU/node-appdmg/issues/14
 
 By default hidden files will show for users with `com.apple.finder AppleShowAllFiles`
 set to `TRUE`. This can be worked around by moving all hidden files outside the initial
-window size, this has the side-effect of enabling a scrollbar.
+window size (using `"type": "position"`), this has the side-effect of enabling a scrollbar.
 
 Files to usually move:
 
