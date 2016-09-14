@@ -5,7 +5,6 @@
   "author": "Linus Unnebäck <linus@folkdatorn.se>",
   "bin": "bin/appdmg.js",
   "main": "index.js",
-  "preferGlobal": true,
   "dependencies": {
     "async": "^1.4.2",
     "cp-file": "^3.1.0",
