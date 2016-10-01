@@ -55,7 +55,7 @@ the JSON file's path.
 + `icon-size` (number, optional) - Size of all the icons inside the DMG
 + `window` (object, optional) - Window options
     + `position` (object, optional) - Position when opened
-        + `x` (number, required) - X position relative to bottom of the screen
+        + `x` (number, required) - X position relative to left of the screen
         + `y` (number, required) - Y position relative to bottom of the screen
     + `size` (object, optional) - Window size
         + `width` (number, required) - Window width
