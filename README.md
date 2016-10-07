@@ -41,7 +41,7 @@ the JSON file's path.
   "background": "test-background.png",
   "contents": [
     { "x": 448, "y": 344, "type": "link", "path": "/Applications" },
-    { "x": 192, "y": 344, "type": "file", "path": "TestApp.app" }
+    { "x": 192, "y": 344, "type": "file" }
   ]
 }
 ```
@@ -74,7 +74,7 @@ the JSON file's path.
           + `link` - Creates a link to the specified target
           + `file` - Adds a file to the DMG
           + `position` - Positions a present file
-      + `path` (string, required) - Path to the file
+      + `path` (string, required for links) - Path to the link
       + `name` (string, optional) - Name of the file within the DMG
 
 `0.1.x` used a different JSON format. This format is still supported but
