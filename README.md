@@ -68,14 +68,14 @@ the JSON file's path.
     + `UDBZ` - UDIF bzip2-compressed image (OS X 10.4+ only)
     + `ULFO` - UDIF lzfse-compressed image (OS X 10.11+ only)
 + `contents` (array[object], required) - This is the contents of your DMG.
-      + `x` (number, required) - X position relative to icon center
-      + `y` (number, required) - Y position relative to icon center
-      + `type` (enum[string], required)
-          + `link` - Creates a link to the specified target
-          + `file` - Adds a file to the DMG
-          + `position` - Positions a present file
-      + `path` (string, required) - Path to the file
-      + `name` (string, optional) - Name of the file within the DMG
+    + `x` (number, required) - X position relative to icon center
+    + `y` (number, required) - Y position relative to icon center
+    + `type` (enum[string], required)
+        + `link` - Creates a link to the specified target
+        + `file` - Adds a file to the DMG
+        + `position` - Positions a present file
+    + `path` (string, required) - Path to the file
+    + `name` (string, optional) - Name of the file within the DMG
 
 `0.1.x` used a different JSON format. This format is still supported but
 deprecated, please update your json.
