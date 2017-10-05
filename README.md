@@ -76,6 +76,7 @@ the JSON file's path.
         + `position` - Positions a present file
     + `path` (string, required) - Path to the file
     + `name` (string, optional) - Name of the file within the DMG
++ `code-sign-identity` (string, optional) - The identity with which to sign the resulting DMG
 
 `0.1.x` used a different JSON format. This format is still supported but
 deprecated, please update your json.
