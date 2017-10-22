@@ -98,6 +98,20 @@
           "path"
         ]
       }
+    },
+    "code-sign": {
+      "type": "object",
+      "properties": {
+        "signing-identity": {
+          "type": "string"
+        },
+        "identifier": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "signing-identity"
+      ]
     }
   },
   "required": [
