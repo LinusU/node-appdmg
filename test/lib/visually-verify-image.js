@@ -4,6 +4,7 @@ var looksSame = require('looks-same')
 var spawnSync = require('child_process').spawnSync
 var captureWindow = require('capture-window')
 var sizeOf = require('image-size')
+var imgur = require('imgur')
 
 var hdiutil = require('../../lib/hdiutil')
 
@@ -63,11 +64,28 @@ function captureAndSaveDiff (title, expectedPath, cb) {
     looksSame.createDiff(opts, function (err, data) {
       if (err) return cb(err)
 
-      temp.writeFile(data, function (err, diffPath) {
-        if (err) return cb(err)
+      if (process.env.CI) {
+        imgur.uploadFile(pngPath)
+          .then(function (json) {
+            const pngUrl = json.data.link
+            imgur.uploadBase64(data.toString('base64'))
+              .then(function (json) {
+                setImmediate(cb, null, { diff: json.data.link, actual: pngUrl })
+              })
+              .catch(function (err) {
+                setImmediate(cb, err)
+              })
+          })
+          .catch(function (err) {
+            setImmediate(cb, err)
+          })
+      } else {
+        temp.writeFile(data, function (err, diffPath) {
+          if (err) return cb(err)
 
-        cb(null, { diff: diffPath, actual: pngPath })
-      })
+          cb(null, { diff: diffPath, actual: pngPath })
+        })
+      }
     })
   })
 }
