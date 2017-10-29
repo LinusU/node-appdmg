@@ -53,6 +53,7 @@ the JSON file's path.
 + `background` (string, optional) - Path to your background
 + `background-color` (string, optional) - Background color (accepts css colors)
 + `icon-size` (number, optional) - Size of all the icons inside the DMG
++ `overwrite-target` (boolean, optional) - Overwrite target if it exists
 + `window` (object, optional) - Window options
     + `position` (object, optional) - Position when opened
         + `x` (number, required) - X position relative to left of the screen
