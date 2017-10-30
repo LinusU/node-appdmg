@@ -19,6 +19,9 @@
     "icon-size": {
       "type": "integer"
     },
+    "overwrite-target": {
+      "type": "boolean"
+    },
     "window": {
       "type": "object",
       "properties": {
