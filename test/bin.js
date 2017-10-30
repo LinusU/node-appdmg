@@ -1,14 +1,16 @@
 /* eslint-env mocha */
 
-var pkg = require('../package.json')
+'use strict'
 
-var fs = require('fs')
-var path = require('path')
-var temp = require('fs-temp')
-var assert = require('assert')
-var spawnSync = require('child_process').spawnSync
+const pkg = require('../package.json')
 
-var bin = path.join(__dirname, '..', 'bin', 'appdmg.js')
+const fs = require('fs')
+const path = require('path')
+const temp = require('fs-temp')
+const assert = require('assert')
+const spawnSync = require('child_process').spawnSync
+
+const bin = path.join(__dirname, '..', 'bin', 'appdmg.js')
 
 function bufferContains (buffer, needle) {
   return (buffer.toString().indexOf(needle) !== -1)
@@ -16,13 +18,13 @@ function bufferContains (buffer, needle) {
 
 describe('bin', function () {
   it('should print version number', function () {
-    var res = spawnSync(bin, [ '--version' ])
+    const res = spawnSync(bin, [ '--version' ])
 
     assert.ok(bufferContains(res.stderr, pkg.version))
   })
 
   it('should print usage', function () {
-    var res = spawnSync(bin, [ '--help' ])
+    const res = spawnSync(bin, [ '--help' ])
 
     assert.ok(bufferContains(res.stderr, 'Usage:'))
   })
@@ -30,11 +32,11 @@ describe('bin', function () {
   it('should create dmg file', function () {
     this.timeout(60000)
 
-    var source = path.join(__dirname, 'assets', 'appdmg.json')
-    var targetDir = temp.mkdirSync()
-    var targetPath = path.join(targetDir, 'Test.dmg')
+    const source = path.join(__dirname, 'assets', 'appdmg.json')
+    const targetDir = temp.mkdirSync()
+    const targetPath = path.join(targetDir, 'Test.dmg')
 
-    var res = spawnSync(bin, [ source, targetPath ])
+    const res = spawnSync(bin, [ source, targetPath ])
 
     fs.unlinkSync(targetPath)
     fs.rmdirSync(targetDir)
