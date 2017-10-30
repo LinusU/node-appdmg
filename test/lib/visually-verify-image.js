@@ -1,16 +1,18 @@
-var fs = require('fs')
-var temp = require('fs-temp').template('%s.png')
-var looksSame = require('looks-same')
-var spawnSync = require('child_process').spawnSync
-var captureWindow = require('capture-window')
-var sizeOf = require('image-size')
+'use strict'
 
-var hdiutil = require('../../lib/hdiutil')
+const fs = require('fs')
+const temp = require('fs-temp').template('%s.png')
+const looksSame = require('looks-same')
+const spawnSync = require('child_process').spawnSync
+const captureWindow = require('capture-window')
+const sizeOf = require('image-size')
 
-var toleranceOpts = { tolerance: 20 }
+const hdiutil = require('../../lib/hdiutil')
+
+const toleranceOpts = { tolerance: 20 }
 
 function retry (fn, cb) {
-  var triesLeft = 8
+  let triesLeft = 8
 
   function runIteration () {
     fn(function (err) {
@@ -42,9 +44,7 @@ function captureAndVerify (title, expectedPath, cb) {
         if (err2) return cb(err2)
         if (ok) return cb(null)
 
-        var err = new Error('Image looks visually incorrect')
-        err.code = 'VISUALLY_INCORRECT'
-        cb(err)
+        cb(Object.assign(new Error('Image looks visually incorrect'), { code: 'VISUALLY_INCORRECT' }))
       })
     })
   })
@@ -54,7 +54,7 @@ function captureAndSaveDiff (title, expectedPath, cb) {
   captureWindow('Finder', title, function (err, pngPath) {
     if (err) return cb(err)
 
-    var opts = Object.assign({
+    const opts = Object.assign({
       reference: expectedPath,
       current: pngPath,
       highlightColor: '#f0f'

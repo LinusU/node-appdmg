@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 
+'use strict'
+
 process.title = 'appdmg'
 
-var path = require('path')
-var minimist = require('minimist')
-var pkg = require('../package.json')
-var appdmg = require('../index.js')
-var colors = require('../lib/colors')
-var repeatString = require('repeat-string')
+const path = require('path')
+const minimist = require('minimist')
+const pkg = require('../package.json')
+const appdmg = require('../index.js')
+const colors = require('../lib/colors')
+const repeatString = require('repeat-string')
 
 function maybeWithColor (color, text) {
   if (!process.stderr.isTTY) return text
@@ -21,14 +23,14 @@ process.on('uncaughtException', function (err) {
   }
 
   if (argv === undefined || argv.verbose) {
-    process.stderr.write(err.stack + '\n\n')
+    process.stderr.write(`${err.stack}\n\n`)
   }
 
-  process.stderr.write(maybeWithColor('red', err.name + ': ' + err.message) + '\n')
+  process.stderr.write(`${maybeWithColor('red', `${err.name}: ${err.message}`)}\n`)
   process.exit(1)
 })
 
-var usage = [
+const usage = [
   'Generate beautiful dmg-images for your OS X applications.',
   '',
   'Usage: appdmg <json-path> <dmg-path>',
@@ -52,18 +54,18 @@ var usage = [
   ''
 ].join('\n')
 
-var argv = minimist(process.argv.slice(2), {
+const argv = minimist(process.argv.slice(2), {
   boolean: [ 'verbose', 'quiet', 'help', 'version' ],
   alias: { v: 'verbose' }
 })
 
 if (argv.version) {
-  process.stderr.write('node-appdmg v' + pkg.version + '\n')
+  process.stderr.write(`node-appdmg v${pkg.version}\n`)
   process.exit(0)
 }
 
 if (argv.help || argv._.length < 2) {
-  process.stderr.write(usage + '\n')
+  process.stderr.write(`${usage}\n`)
   process.exit(0)
 }
 
@@ -79,31 +81,31 @@ if (path.extname(argv._[1]) !== '.dmg') {
   throw new Error('Output must have the .dmg file extension')
 }
 
-var source = argv._[0]
-var target = argv._[1]
-var p = appdmg({ source: source, target: target })
+const source = argv._[0]
+const target = argv._[1]
+const p = appdmg({ source, target })
 
 p.on('progress', function (info) {
   if (argv.quiet) return
 
   if (info.type === 'step-begin') {
-    var line = '[' + (info.current <= 9 ? ' ' : '') + info.current + '/' + info.total + '] ' + info.title + '...'
-    process.stderr.write(line + repeatString(' ', 45 - line.length))
+    const line = `[${info.current <= 9 ? ' ' : ''}${info.current}/${info.total}] ${info.title}...`
+    process.stderr.write(`${line}${repeatString(' ', 45 - line.length)}`)
   }
 
   if (info.type === 'step-end') {
-    var op = ({
+    const op = ({
       ok: ['green', ' OK '],
       skip: ['yellow', 'SKIP'],
       error: ['red', 'FAIL']
     }[info.status])
 
-    process.stderr.write('[' + maybeWithColor(op[0], op[1]) + ']\n')
+    process.stderr.write(`[${maybeWithColor(op[0], op[1])}]\n`)
   }
 })
 
 p.on('finish', function () {
   if (argv.quiet) return
 
-  process.stderr.write('\n' + maybeWithColor('green', 'Your image is ready:') + '\n' + target + '\n')
+  process.stderr.write(`\n${maybeWithColor('green', 'Your image is ready:')}\n${target}\n`)
 })

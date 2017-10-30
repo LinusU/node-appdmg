@@ -1,8 +1,10 @@
-var spawnSync = require('child_process').spawnSync
+'use strict'
+
+const spawnSync = require('child_process').spawnSync
 
 function imageFormat (imagePath) {
-  var arg = ['imageinfo', '-format', imagePath]
-  var out = spawnSync('hdiutil', arg).stdout
+  const arg = ['imageinfo', '-format', imagePath]
+  const out = spawnSync('hdiutil', arg).stdout
 
   return out.toString().trim()
 }

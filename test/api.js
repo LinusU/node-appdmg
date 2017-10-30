@@ -1,19 +1,21 @@
 /* eslint-env mocha */
 
-var appdmg = require('../')
-var imageFormat = require('./lib/image-format')
-var visuallyVerifyImage = require('./lib/visually-verify-image')
+'use strict'
 
-var fs = require('fs')
-var path = require('path')
-var temp = require('fs-temp')
-var assert = require('assert')
+const fs = require('fs')
+const path = require('path')
+const temp = require('fs-temp')
+const assert = require('assert')
 
-var STEPS = 22
+const appdmg = require('../')
+const imageFormat = require('./lib/image-format')
+const visuallyVerifyImage = require('./lib/visually-verify-image')
+
+const STEPS = 22
 
 function runAppdmg (opts, verify, cb) {
-  var progressCalled = 0
-  var ee = appdmg(opts)
+  let progressCalled = 0
+  const ee = appdmg(opts)
 
   ee.on('progress', function () {
     progressCalled++
@@ -27,13 +29,13 @@ function runAppdmg (opts, verify, cb) {
       return cb(err)
     }
 
-    var expected = path.join(__dirname, verify.visually)
+    const expected = path.join(__dirname, verify.visually)
     visuallyVerifyImage(opts.target, verify.title, expected, cb)
   })
 }
 
 describe('api', function () {
-  var targetDir, targetPath
+  let targetDir, targetPath
 
   beforeEach(function () {
     targetDir = temp.mkdirSync()
@@ -48,12 +50,12 @@ describe('api', function () {
   it('creates an image from a modern specification', function (done) {
     this.timeout(60000) // 1 minute
 
-    var opts = {
+    const opts = {
       target: targetPath,
       source: path.join(__dirname, 'assets', 'appdmg.json')
     }
 
-    var verify = {
+    const verify = {
       format: 'UDZO',
       title: 'Test Title',
       visually: 'accepted-1.png'
@@ -65,12 +67,12 @@ describe('api', function () {
   it('creates an image from a legacy specification', function (done) {
     this.timeout(60000) // 1 minute
 
-    var opts = {
+    const opts = {
       target: targetPath,
       source: path.join(__dirname, 'assets', 'appdmg-legacy.json')
     }
 
-    var verify = {
+    const verify = {
       format: 'UDZO',
       title: 'Test Title',
       visually: 'accepted-1.png'
@@ -82,7 +84,7 @@ describe('api', function () {
   it('creates an image from a passed options', function (done) {
     this.timeout(60000) // 1 minute
 
-    var opts = {
+    const opts = {
       target: targetPath,
       basepath: path.join(__dirname, 'assets'),
       specification: {
@@ -97,7 +99,7 @@ describe('api', function () {
       }
     }
 
-    var verify = {
+    const verify = {
       format: 'UDZO',
       title: 'Test Title',
       visually: 'accepted-1.png'
@@ -109,7 +111,7 @@ describe('api', function () {
   it('creates an image without compression', function (done) {
     this.timeout(60000) // 1 minute
 
-    var opts = {
+    const opts = {
       target: targetPath,
       basepath: path.join(__dirname, 'assets'),
       specification: {
@@ -125,7 +127,7 @@ describe('api', function () {
       }
     }
 
-    var verify = {
+    const verify = {
       format: 'UDRO',
       title: 'Test Title',
       visually: 'accepted-1.png'
@@ -137,12 +139,12 @@ describe('api', function () {
   it('creates an image with a background color', function (done) {
     this.timeout(60000) // 1 minute
 
-    var opts = {
+    const opts = {
       target: targetPath,
       source: path.join(__dirname, 'assets', 'appdmg-bg-color.json')
     }
 
-    var verify = {
+    const verify = {
       format: 'UDZO',
       title: 'Test Title',
       visually: 'accepted-2.png'
@@ -154,7 +156,7 @@ describe('api', function () {
   it('creates an image with custom names', function (done) {
     this.timeout(60000) // 1 minute
 
-    var opts = {
+    const opts = {
       target: targetPath,
       basepath: path.join(__dirname, 'assets'),
       specification: {
@@ -169,7 +171,7 @@ describe('api', function () {
       }
     }
 
-    var verify = {
+    const verify = {
       format: 'UDZO',
       title: 'Test Title',
       visually: 'accepted-3.png'
