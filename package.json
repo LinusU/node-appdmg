@@ -5,6 +5,7 @@
   "author": "Linus Unnebäck <linus@folkdatorn.se>",
   "bin": "bin/appdmg.js",
   "main": "index.js",
+  "faircodeId": "pd_18w0E1X47qq9l6Z90blOhx",
   "dependencies": {
     "async": "^1.4.2",
     "buffer-alloc": "^1.1.0",
