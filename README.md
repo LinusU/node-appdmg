@@ -158,12 +158,6 @@ Files to usually move:
 - `.Trashes`
 - `.VolumeIcon.icns`
 
-## Support development
-
-Not required at all, appdmg is open source software. Still, higly appriciated and helps moving the development forward!
-
-[![Faircode](https://faircode.io/product/appdmg/badge)](https://faircode.io/product/appdmg?utm_source=badge&utm_medium=badgelarge&utm_campaign=appdmg)
-
 ## Alternatives
 
 - [create-dmg](https://github.com/andreyvit/create-dmg/blob/master/README.md), a Bash script

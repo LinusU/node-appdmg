@@ -4,7 +4,6 @@
   "license": "MIT",
   "author": "Linus Unnebäck <linus@folkdatorn.se>",
   "bin": "bin/appdmg.js",
-  "faircodeId": "pd_18w0E1X47qq9l6Z90blOhx",
   "repository": "LinusU/node-appdmg",
   "dependencies": {
     "async": "^1.4.2",
