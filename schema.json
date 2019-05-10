@@ -112,6 +112,9 @@
       "required": [
         "signing-identity"
       ]
+    },
+    "license": {
+      "type": "object"
     }
   },
   "required": [

@@ -2,8 +2,12 @@
 
 'use strict'
 
+const execa = require('execa')
 const fs = require('fs')
 const path = require('path')
+const plist = require('plist')
+const readXml = require('read-xml')
+const { pipeline, Writable } = require('stream')
 const temp = require('fs-temp')
 const assert = require('assert')
 
@@ -11,7 +15,7 @@ const appdmg = require('../')
 const imageFormat = require('./lib/image-format')
 const visuallyVerifyImage = require('./lib/visually-verify-image')
 
-const STEPS = 22
+const STEPS = 23
 
 function runAppdmg (opts, verify, cb) {
   let progressCalled = 0
@@ -178,5 +182,78 @@ describe('api', function () {
     }
 
     runAppdmg(opts, verify, done)
+  })
+
+  it('creates an image with a license agreement', function (done) {
+    this.timeout(60000) // 1 minute
+
+    const ee = appdmg({
+      target: targetPath,
+      basepath: path.join(__dirname, 'assets'),
+      specification: {
+        title: 'Test Title',
+        contents: [],
+        license: {
+          body: [{
+            lang: 'en-US',
+            text: 'Hello, world!'
+          }]
+        }
+      }
+    })
+
+    ee.on('finish', function () {
+      const child = execa(
+        'hdiutil',
+        ['udifderez', '-xml', targetPath],
+        {
+          stdio: ['inherit', 'pipe', 'inherit'],
+          timeout: 60000
+        }
+      )
+
+      let xmlStr = ''
+
+      const childPipe = pipeline(
+        child.stdout,
+        readXml.createStream(),
+        new Writable({
+          decodeStrings: false,
+          write (chunk, encoding, cb) {
+            xmlStr += chunk
+            cb()
+          }
+        }),
+        function (err) {
+          if (err) {
+            return done(err)
+          }
+
+          try {
+            const pl = plist.parse(xmlStr)
+            const textRez = pl.TEXT[0]
+
+            assert.strictEqual(textRez.ID, '5000')
+            assert.strictEqual(pl.TEXT[0].Data.toString('ascii'), 'Hello, world!')
+          } catch (err) {
+            return done(err)
+          }
+
+          done()
+        }
+      )
+
+      child.on('error', function (err) {
+        childPipe.destroy()
+        done(err)
+      })
+
+      child.on('exit', function (code) {
+        if (code) {
+          childPipe.destroy()
+          done(new Error(`hdiutil udifderez exited with code ${code}.`))
+        }
+      })
+    })
   })
 })

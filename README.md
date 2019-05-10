@@ -42,6 +42,20 @@ the JSON file's path.
   "contents": [
     { "x": 448, "y": 344, "type": "link", "path": "/Applications" },
     { "x": 192, "y": 344, "type": "file", "path": "TestApp.app" }
+  ],
+  "license": [
+    {
+      "body": [
+        {
+          "lang": "en-US",
+          "text": "This is an example license agreement."
+        },
+        {
+          "lang": "fr-FR",
+          "text": "Ceci est un exemple de contrat de licence."
+        }
+      ]
+    }
   ]
 }
 ```
@@ -76,6 +90,29 @@ the JSON file's path.
       - `position` - Positions a present file
     - `path` (string, required) - Path to the file
     - `name` (string, optional) - Name of the file within the DMG
+- `license` (object, optional) - License agreement to add to the DMG ([see detailed documentation](https://github.com/argv-minus-one/dmg-license/blob/master/docs/License%20Specifications.md))
+  - `body` (array[object], required) - Localized license texts
+    - `lang` (string or integer or array[string or integer], required) - Language(s) of this localization of the license agreement
+      - Can be an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag), a classic Mac OS [language code](https://github.com/phracker/MacOSX-SDKs/blob/aea47c83334af9c27dc57c49ca268723ef5e6349/MacOSX10.6.sdk/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/Headers/Script.h#L285), or an array of them
+      - See [full list of supported language tags](https://github.com/argv-minus-one/dmg-license/blob/master/docs/Supported%20Language%20Tags.md)
+    - `text` or `file` (string, required) - Text of the license agreement in the given `lang`, or the path to the file containing the text
+    - `charset` (string, optional, default: UTF-8) - Character set of the `file`
+    - `type` (enum[string], optional)
+      - `plain` - License body is plain text
+      - `rtf` - License body is RTF
+      - If omitted, this defaults to `rtf` if `file` ends with `.rtf`, otherwise `plain`
+  - `labels` (array[object], optional) - Localized label strings for the license agreement window
+    - `lang` (string or integer or array[string or integer], required) - Language(s) of this label set
+    - `localizedName` (string, optional) - Localized name of this language
+    - `agree` (string, required) - “Agree” button label
+    - `disagree` (string, required) - “Disagree” button label
+    - `print` (string, required) - “Print” button label
+    - `save` (string, required) - “Save” button label
+    - `message` (string, required) - Brief instructions for the user
+  - `rawLabels` (array[object], optional) - Localized label strings for the license agreement window, in [raw binary format](https://github.com/argv-minus-one/dmg-license/blob/master/docs/Raw%20labels%20format.md)
+    - `lang` (string or integer or array[string or integer], required) - Language(s) of this label set
+    - `file` (string, required) - File containing the label strings
+  - `defaultLang` (string or integer, optional, default: first `lang` of first `body`) - Default language to use if there is no license localization in the user's preferred language
 - `code-sign` (object, optional) - Options for codesigning the DMG
   - `signing-identity` (string, required) - The identity with which to sign the resulting DMG
   - `identifier` (string, optional) - Explicitly set the unique identifier string that is embedded in code signatures
