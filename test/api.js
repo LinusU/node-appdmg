@@ -23,8 +23,8 @@ function runAppdmg (opts, verify, cb) {
 
   ee.on('finish', function () {
     try {
-      assert.equal(progressCalled, STEPS * 2)
-      assert.equal(imageFormat(opts.target), verify.format)
+      assert.strictEqual(progressCalled, STEPS * 2)
+      assert.strictEqual(imageFormat(opts.target), verify.format)
     } catch (err) {
       return cb(err)
     }
