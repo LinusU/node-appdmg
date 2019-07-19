@@ -21,6 +21,8 @@ function runAppdmg (opts, verify, cb) {
     progressCalled++
   })
 
+  ee.on('error', cb)
+
   ee.on('finish', function () {
     try {
       assert.strictEqual(progressCalled, STEPS * 2)
