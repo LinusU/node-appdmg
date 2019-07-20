@@ -139,6 +139,56 @@ const ee = appdmg({
 });
 ```
 
+The object returned from the `appdmg` function also has these methods and properties:
+
+### ee.waitFor(promise)
+
+Pauses execution until the given `Promise` completes. If the promise rejects, then the appdmg run is aborted. This lets you do custom asynchronous work on the disk image while it's being built.
+
+For example, suppose your disk image will contain a folder called “Super Secret Folder”, which you want to be hidden from the Finder. Here's how to do it, using the Xcode command-line tools:
+
+```javascript
+const appdmg = require('appdmg');
+const execa = require('execa');
+const path = require('path');
+
+const ee = appdmg({
+  // appdmg options go here
+});
+
+async function hideSecretFolder () {
+  // Use the SetFile program (it comes with Xcode) to hide `Super Secret Folder` from the Finder.
+  await execa('SetFile', [
+    '-a',
+    'V',
+    path.join(ee.temporaryMountPath, 'Super Secret Folder')
+  ]);
+}
+
+ee.on('progress', info => {
+  if (info.type === 'step-begin' && info.title === 'Unmounting temporary image') {
+    ee.waitFor(hideSecretFolder());
+    // appdmg will now wait, until hideSecretFolder() is finished, before unmounting the temporary image.
+  }
+})
+```
+
+### ee.abort(err)
+
+Abort the appdmg run with `err` as the reason. It must be a truthy value, preferably an `Error`.
+
+### ee.asPromise
+
+A `Promise` that completes when appdmg is finished.
+
+### ee.temporaryImagePath
+
+Path to the temporary disk image. This is a writable disk image that appdmg creates and mounts while it's working.
+
+### ee.temporaryMountPath
+
+Path where the temporary disk image is currently mounted. This property is set when it's mounted, and deleted when it's unmounted.
+
 ## OS Support
 
 Currently the only supported os is Mac OS X.
