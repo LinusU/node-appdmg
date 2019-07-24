@@ -7,7 +7,7 @@
   "repository": "LinusU/node-appdmg",
   "dependencies": {
     "async": "^1.4.2",
-    "dmg-license": "^1.0.4",
+    "dmg-license": "^1.0.5",
     "ds-store": "^0.1.5",
     "execa": "^1.0.0",
     "fs-temp": "^1.0.0",
