@@ -331,4 +331,35 @@ describe('api', function () {
       }
     })
   }
+
+  it('doesn\'t go into an infinite loop when trying to waitFor() on a cleanup step', function (done) {
+    this.timeout(60000) // 1 minute
+
+    const opts = {
+      target: targetPath,
+      source: path.join(__dirname, 'assets', 'appdmg.json')
+    }
+
+    const ee = appdmg(opts)
+    const err = new Error('test error')
+    err[require('util').inspect.custom] = () => '' // Hide from console.error
+
+    ee.on('error', _err => {
+      if (_err === err) {
+        done()
+      } else {
+        done(new Error(`appdmg errored with wrong error: ${_err}`))
+      }
+    })
+
+    ee.on('finish', () => {
+      done(new Error('appdmg should have errored, but didn\'t'))
+    })
+
+    ee.on('progress', info => {
+      if (info.type === 'step-begin' && info.title === 'Unmounting temporary image') {
+        ee.waitFor(Promise.reject(err))
+      }
+    })
+  })
 })

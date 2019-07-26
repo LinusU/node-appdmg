@@ -141,6 +141,12 @@ const ee = appdmg({
 
 The object returned from the `appdmg` function also has these methods and properties:
 
+### ee.hasErrored
+
+This property is initially `false`. It becomes `true` when appdmg encounters an error, and is cleaning up.
+
+When `hasErrored` is `true`, avoid doing anything in an event handler that could throw. Doing so will prevent appdmg from cleaning up after an error (unmounting the temporary disk image, deleting it, and so on).
+
 ### ee.waitFor(promise)
 
 Pauses execution until the given `Promise` completes. If the promise rejects, then the appdmg run is aborted. This lets you do custom asynchronous work on the disk image while it's being built.
@@ -166,7 +172,7 @@ async function hideSecretFolder () {
 }
 
 ee.on('progress', info => {
-  if (info.type === 'step-begin' && info.title === 'Unmounting temporary image') {
+  if (!ee.hasErrored && info.type === 'step-begin' && info.title === 'Unmounting temporary image') {
     ee.waitFor(hideSecretFolder());
     // appdmg will now wait, until hideSecretFolder() is finished, before unmounting the temporary image.
   }
@@ -176,6 +182,8 @@ ee.on('progress', info => {
 ### ee.abort(err)
 
 Abort the appdmg run with `err` as the reason. It must be a truthy value, preferably an `Error`.
+
+This method has no effect if appdmg has already encountered an error (indicated by `hasErrored` being `true`).
 
 ### ee.asPromise
 
