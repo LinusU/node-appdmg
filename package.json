@@ -32,5 +32,12 @@
     "looks-same": "^7.2.1",
     "mocha": "^6.1.4",
     "standard": "^12.0.1"
-  }
+  },
+  "files": [
+    "help/help.png",
+    "bin/*.js",
+    "lib/**/*.js",
+    "schema.json",
+    "index.js"
+  ]
 }
