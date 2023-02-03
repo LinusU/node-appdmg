@@ -68,6 +68,9 @@ the JSON file's path.
     - `UDBZ` - UDIF bzip2-compressed image (OS X 10.4+ only)
     - `ULFO` - UDIF lzfse-compressed image (OS X 10.11+ only)
     - `ULMO` - UDIF lzma-compressed image (macOS 10.15+ only)
+- `filesystem` (enum[string], optional) - Disk image filesystem
+    - `HFS+`
+    - `APFS` (macOS 10.13+ only)
 - `contents` (array[object], required) - This is the contents of your DMG.
     - `x` (number, required) - X position relative to icon center
     - `y` (number, required) - Y position relative to icon center

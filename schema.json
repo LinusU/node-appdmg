@@ -66,6 +66,13 @@
         "UDBZ"
       ]
     },
+    "filesystem": {
+      "type": "string",
+      "enum": [
+        "HFS+",
+        "APFS"
+      ]
+    },
     "contents": {
       "type": "array",
       "items": {
